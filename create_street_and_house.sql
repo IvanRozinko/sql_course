@@ -12,6 +12,7 @@ CREATE TABLE `street`(
 
 CREATE TABLE `historic_street`(
 	id INT PRIMARY KEY AUTO_INCREMENT,
+	name VARCHAR(100) NOT NULL,
     street_id INT NOT NULL,
     date_applied DATE NOT NULL,
     is_latest BOOLEAN DEFAULT FALSE,
@@ -20,9 +21,10 @@ CREATE TABLE `historic_street`(
 
 CREATE TABLE `house`(
 	id INT PRIMARY KEY AUTO_INCREMENT,
-    number VARCHAR(10) UNIQUE,
+    number VARCHAR(10),
     street_id INT NOT NULL,
     longitude DECIMAL(10,7) NOT NULL,
     latitude DECIMAL(10,7) NOT NULL,
-    FOREIGN KEY (street_id) REFERENCES street(id)   
+    FOREIGN KEY (street_id) REFERENCES street(id),
+	UNIQUE (street_id, number)
 );
