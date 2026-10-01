@@ -8,7 +8,14 @@ CREATE TABLE `user`(
 CREATE TABLE `driver`(
 	id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT NOT NULL,
-    rating INT,
+    rating TINYINT DEFAULT 0,
+    FOREIGN KEY (user_id) REFERENCES `user`(id)
+);
+
+CREATE TABLE `passenger`(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    rating TINYINT DEFAULT 0,
     FOREIGN KEY (user_id) REFERENCES `user`(id)
 );
 
@@ -18,19 +25,10 @@ CREATE TABLE `ride`(
     driver_id INT NOT NULL,
     start_date DATETIME NOT NULL,
     end_date DATETIME,
-    rating INT,
-    status ENUM('pending', 'active', 'done', 'failed'),
+    rating TINYINT DEFAULT 0,
+    status ENUM('pending', 'active', 'done', 'failed') NOT NULL DEFAULT 'pending',
+	FOREIGN KEY (passenger_id) REFERENCES `passenger`(id),
     FOREIGN KEY (driver_id) REFERENCES `driver`(id)
 );
 
-CREATE TABLE `passenger`(
-	id INT PRIMARY KEY AUTO_INCREMENT,
-    user_id INT NOT NULL,
-    rating INT,
-    last_ride_id INT,
-    FOREIGN KEY (user_id) REFERENCES `user`(id),
-    FOREIGN KEY (last_ride_id) REFERENCES `ride`(id)
-);
-
-ALTER TABLE `ride` ADD CONSTRAINT FOREIGN KEY (passenger_id) REFERENCES `passenger`(id);
 
