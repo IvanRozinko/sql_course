@@ -28,3 +28,4 @@ CREATE TABLE `house`(
     FOREIGN KEY (street_id) REFERENCES street(id),
 	UNIQUE (street_id, number)
 );
+
