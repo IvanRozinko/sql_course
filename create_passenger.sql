@@ -9,7 +9,7 @@ CREATE TABLE `driver`(
 	id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT NOT NULL,
 	-- TODO this will be aggregate field most likely calculated on `driver_rating` table update probalby using a trigger
-    rating DECIMAL(1, 1) DEFAULT NULL,
+    rating DECIMAL(3, 2) DEFAULT NULL,
     FOREIGN KEY (user_id) REFERENCES `user`(id)
 );
 
@@ -17,7 +17,7 @@ CREATE TABLE `passenger`(
 	id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT NOT NULL,
 	-- TODO this will be aggregate field most likely calculated on `passenger_rating` table update probalby using a trigger
-    rating DECIMAL(1, 1) DEFAULT NULL,
+    rating DECIMAL(3, 2) DEFAULT NULL,
     FOREIGN KEY (user_id) REFERENCES `user`(id)
 );
 
